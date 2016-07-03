@@ -1,15 +1,20 @@
 body {
-  background-color: #bfb5b2;
-  color: #2e4045;
+  background-color: #999999;
   
+
 }
 #title-page {
   font-family: 'Kumar One', cursive;
 }
 .block {
-  background-color: #c7bbc9;
+  background-color: #444444;
+  color : #f5f5f5;
 
 }
 .logo {
   max-height: 90px;
+}
+.online {
+  min-height :90px;
+  background-color: #7ddc1f;
 }
