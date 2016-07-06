@@ -6,27 +6,40 @@ $(document).ready(function(){
       var url = data.url;
       var logo = data.logo;
       var name = data.display_name;
-      var status = data.status;
-      var blockToInclude =
-      `<div class="container block img-rounded">
-        <div class="row">
-          <div class="col-sm-2">
-            <a href="${url}">
-              <img src="${logo}"
-                alt="logo" class="img img-responsive img-rounded logo center-block" />
-            </a>
-          </div>
-          <div class="col-sm-7">
-            <a  href="${url}"><h4 class="text-center "><strong>${name}</strong></h4></a>
-            <h4 class="text-center"><strong>${status}</strong></h4>
-          </div>
-          <div class="col-sm-3 offline">
-            <h3 class = "text-center offline-text">...</h3>
-          </div>
-        </div>
-      </div>`;
+      var info = data.status;
+      var status = '';
+      $.getJSON('https://api.twitch.tv/kraken/streams/' +profile, function(channel) {
 
-      $('.main').append(blockToInclude);
+                      if (channel["stream"] == null) {
+                          console.log('off');
+                          status = 'offline';
+                      } else {
+                          console.log('on');
+                          status = 'online';
+                      }
+                      var blockToInclude =
+                      `<div class="container block img-rounded">
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <a href="${url}">
+                              <img src="${logo}"
+                                alt="logo" class="img img-responsive img-rounded logo center-block" />
+                            </a>
+                          </div>
+                          <div class="col-sm-7">
+                            <a  href="${url}"><h4 class="text-center "><strong><u>${name}</u></strong></h4></a>
+                            <h5 class="text-center"><strong>${info}</strong></h5>
+                          </div>
+                          <div class="col-sm-3 ${status}">
+                            <h3 class = "text-center offline-text">${status}</h3>
+                          </div>
+                        </div>
+                      </div>`;
+                      $('.main').append(blockToInclude);
+                    });
+
+
+
     });
   }
   for (var i = 0 ; i < profiles.length;i++){
